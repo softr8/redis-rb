@@ -1,6 +1,6 @@
-require "redis/errors"
+require "tr8dis/errors"
 
-class Redis
+class Tr8dis
   class Client
 
     DEFAULTS = {
@@ -243,13 +243,13 @@ class Redis
 
       begin
         commands.each do |name, *args|
-          @logger.debug("Redis >> #{name.to_s.upcase} #{args.map(&:to_s).join(" ")}")
+          @logger.debug("Tr8dis >> #{name.to_s.upcase} #{args.map(&:to_s).join(" ")}")
         end
 
         t1 = Time.now
         yield
       ensure
-        @logger.debug("Redis >> %0.2fms" % ((Time.now - t1) * 1000)) if t1
+        @logger.debug("Tr8dis >> %0.2fms" % ((Time.now - t1) * 1000)) if t1
       end
     end
 
@@ -257,9 +257,9 @@ class Redis
       @connection = @options[:driver].connect(@options.dup)
 
     rescue TimeoutError
-      raise CannotConnectError, "Timed out connecting to Redis on #{location}"
+      raise CannotConnectError, "Timed out connecting to Tr8dis on #{location}"
     rescue Errno::ECONNREFUSED
-      raise CannotConnectError, "Error connecting to Redis on #{location} (ECONNREFUSED)"
+      raise CannotConnectError, "Error connecting to Tr8dis on #{location} (ECONNREFUSED)"
     end
 
     def ensure_connected
@@ -270,7 +270,7 @@ class Redis
           if Process.pid != @pid
             raise InheritedError,
               "Tried to use a connection from a child process without reconnecting. " +
-              "You need to reconnect to Redis after forking."
+              "You need to reconnect to Tr8dis after forking."
           end
         else
           connect
@@ -342,13 +342,13 @@ class Redis
       if driver.kind_of?(String)
         case driver
         when "ruby"
-          require "redis/connection/ruby"
+          require "tr8dis/connection/ruby"
           driver = Connection::Ruby
         when "hiredis"
-          require "redis/connection/hiredis"
+          require "tr8dis/connection/hiredis"
           driver = Connection::Hiredis
         when "synchrony"
-          require "redis/connection/synchrony"
+          require "tr8dis/connection/synchrony"
           driver = Connection::Synchrony
         else
           raise "Unknown driver: #{driver}"

@@ -3,7 +3,7 @@ require 'rubygems/package_task'
 require 'rake/testtask'
 
 $:.unshift File.join(File.dirname(__FILE__), 'lib')
-require 'redis/version'
+require 'tr8dis/version'
 
 REDIS_DIR = File.expand_path(File.join("..", "test"), __FILE__)
 REDIS_CNF = File.join(REDIS_DIR, "test.conf")
@@ -358,7 +358,7 @@ namespace :commands do
   end
 
   task :verify do
-    require "redis"
+    require 'tr8dis'
     require "stringio"
 
     require "./test/helper"
@@ -367,7 +367,7 @@ namespace :commands do
 
     Rake::Task["test:ruby"].invoke
 
-    redis = Redis.new
+    redis = Tr8dis.new
 
     report = ["Command", "\033[0mDefined?\033[0m", "\033[0mTested?\033[0m"]
 

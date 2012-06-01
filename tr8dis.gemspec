@@ -2,12 +2,12 @@
 
 $:.unshift File.expand_path("../lib", __FILE__)
 
-require "redis/version"
+require "tr8dis/version"
 
 Gem::Specification.new do |s|
-  s.name = "redis"
+  s.name = "tr8dis"
 
-  s.version = Redis::VERSION
+  s.version = Tr8dis::VERSION
 
   s.homepage = "https://github.com/redis/redis-rb"
 

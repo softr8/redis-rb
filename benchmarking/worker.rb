@@ -2,7 +2,7 @@ BENCHMARK_ROOT = File.dirname(__FILE__)
 REDIS_ROOT = File.join(BENCHMARK_ROOT, "..", "lib")
 
 $: << REDIS_ROOT
-require 'redis'
+require 'tr8dis'
 require 'benchmark'
 
 def show_usage

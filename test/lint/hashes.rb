@@ -100,7 +100,7 @@ module Lint
     end
 
     def test_hmset_with_invalid_arguments
-      assert_raise(Redis::CommandError) do
+      assert_raise(Tr8dis::CommandError) do
         r.hmset("hash", "foo1", "bar1", "foo2", "bar2", "foo3")
       end
     end

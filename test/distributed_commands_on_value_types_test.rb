@@ -41,13 +41,13 @@ class TestDistributedCommandsOnValueTypes < Test::Unit::TestCase
   end
 
   def test_randomkey
-    assert_raise Redis::Distributed::CannotDistribute do
+    assert_raise Tr8dis::Distributed::CannotDistribute do
       r.randomkey
     end
   end
 
   def test_rename
-    assert_raise Redis::Distributed::CannotDistribute do
+    assert_raise Tr8dis::Distributed::CannotDistribute do
       r.set("foo", "s1")
       r.rename "foo", "bar"
     end
@@ -57,7 +57,7 @@ class TestDistributedCommandsOnValueTypes < Test::Unit::TestCase
   end
 
   def test_renamenx
-    assert_raise Redis::Distributed::CannotDistribute do
+    assert_raise Tr8dis::Distributed::CannotDistribute do
       r.set("foo", "s1")
       r.rename "foo", "bar"
     end

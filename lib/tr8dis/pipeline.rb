@@ -1,4 +1,4 @@
-class Redis
+class Tr8dis
   unless defined?(::BasicObject)
     class BasicObject
       instance_methods.each { |meth| undef_method(meth) unless meth =~ /\A(__|instance_eval)/ }
@@ -71,7 +71,7 @@ class Redis
         return if replies.last.nil? # The transaction failed because of WATCH.
 
         if replies.last.size < futures.size - 2
-          # Some command wasn't recognized by Redis.
+          # Some command wasn't recognized by Tr8dis.
           raise replies.detect { |r| r.kind_of?(::RuntimeError) }
         end
 
@@ -96,7 +96,7 @@ class Redis
   end
 
   class Future < BasicObject
-    FutureNotReady = ::Redis::FutureNotReady.new
+    FutureNotReady = ::Tr8dis::FutureNotReady.new
 
     def initialize(command, transformation)
       @command = command
@@ -105,7 +105,7 @@ class Redis
     end
 
     def inspect
-      "<Redis::Future #{@command.inspect}>"
+      "<Tr8dis::Future #{@command.inspect}>"
     end
 
     def _set(object)

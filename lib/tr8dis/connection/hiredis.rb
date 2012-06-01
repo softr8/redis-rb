@@ -1,9 +1,9 @@
-require "redis/connection/registry"
-require "redis/errors"
+require "tr8dis/connection/registry"
+require "tr8dis/errors"
 require "hiredis/connection"
 require "timeout"
 
-class Redis
+class Tr8dis
   module Connection
     class Hiredis
 
@@ -60,4 +60,4 @@ class Redis
   end
 end
 
-Redis::Connection.drivers << Redis::Connection::Hiredis
+Tr8dis::Connection.drivers << Tr8dis::Connection::Hiredis

@@ -1,4 +1,4 @@
-require "redis"
+require "tr8dis"
 
 puts <<-EOS
 To play with this example use redis-cli from another terminal, like this:

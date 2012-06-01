@@ -4,7 +4,7 @@
 #
 
 require "benchmark"
-require "redis"
+require "tr8dis"
 
 r = Redis.new
 n = (ARGV.shift || 20000).to_i

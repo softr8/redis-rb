@@ -41,7 +41,7 @@ class TestRemoteServerControlCommands < Test::Unit::TestCase
     log = []
 
     wire = Wire.new do
-      Redis.new(OPTIONS).monitor do |line|
+      Tr8dis.new(OPTIONS).monitor do |line|
         log << line
         break if log.size == 3
       end
@@ -62,7 +62,7 @@ class TestRemoteServerControlCommands < Test::Unit::TestCase
     log = []
 
     wire = Wire.new do
-      Redis.new(OPTIONS).monitor do |line|
+      Tr8dis.new(OPTIONS).monitor do |line|
         log << line
         break if line =~ /set/
       end

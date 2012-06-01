@@ -1,9 +1,9 @@
-require "redis/connection/registry"
-require "redis/connection/command_helper"
-require "redis/errors"
+require "tr8dis/connection/registry"
+require "tr8dis/connection/command_helper"
+require "tr8dis/errors"
 require "socket"
 
-class Redis
+class Tr8dis
   module Connection
     module SocketMixin
 
@@ -52,7 +52,7 @@ class Redis
           if IO.select([self], nil, nil, @timeout)
             retry
           else
-            raise Redis::TimeoutError
+            raise Tr8dis::TimeoutError
           end
         end
 
@@ -104,7 +104,7 @@ class Redis
         include SocketMixin
 
         def self.connect(host, port, timeout)
-          # Limit lookup to IPv4, as Redis doesn't yet do IPv6...
+          # Limit lookup to IPv4, as Tr8dis doesn't yet do IPv6...
           addr = ::Socket.getaddrinfo(host, nil, Socket::AF_INET)
           sock = new(::Socket.const_get(addr[0][0]), Socket::SOCK_STREAM, 0)
           sockaddr = ::Socket.pack_sockaddr_in(port, addr[0][3])
@@ -155,7 +155,7 @@ class Redis
     end
 
     class Ruby
-      include Redis::Connection::CommandHelper
+      include Tr8dis::Connection::CommandHelper
 
       MINUS    = "-".freeze
       PLUS     = "+".freeze
@@ -250,4 +250,4 @@ class Redis
   end
 end
 
-Redis::Connection.drivers << Redis::Connection::Ruby
+Tr8dis::Connection.drivers << Tr8dis::Connection::Ruby

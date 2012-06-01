@@ -1,6 +1,6 @@
 require "socket"
 
-module RedisMock
+module Tr8disMock
   class Server
     VERBOSE = false
 
@@ -66,13 +66,13 @@ module RedisMock
 
   MOCK_PORT = 6382
 
-  # Starts a mock Redis server in a thread.
+  # Starts a mock Tr8dis server in a thread.
   #
   # The server will reply with a `+OK` to all commands, but you can
   # customize it by providing a hash. For example:
   #
-  #     RedisMock.start(:ping => lambda { "+PONG" }) do
-  #       assert_equal "PONG", Redis.new(:port => MOCK_PORT).ping
+  #     Tr8disMock.start(:ping => lambda { "+PONG" }) do
+  #       assert_equal "PONG", Tr8dis.new(:port => MOCK_PORT).ping
   #     end
   #
   def self.start(commands = {})

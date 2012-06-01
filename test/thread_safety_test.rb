@@ -8,7 +8,7 @@ class TestThreadSafety < Test::Unit::TestCase
 
   driver(:ruby, :hiredis) do
     def test_thread_safety
-      redis = Redis.new(OPTIONS)
+      redis = Tr8dis.new(OPTIONS)
       redis.set "foo", 1
       redis.set "bar", 2
 

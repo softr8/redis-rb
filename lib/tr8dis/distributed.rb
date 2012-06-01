@@ -1,6 +1,6 @@
-require "redis/hash_ring"
+require "tr8dis/hash_ring"
 
-class Redis
+class Tr8dis
   class Distributed
 
     class CannotDistribute < RuntimeError
@@ -9,7 +9,7 @@ class Redis
       end
 
       def message
-        "#{@command.to_s.upcase} cannot be used in Redis::Distributed because the keys involved need to be on the same server or because we cannot guarantee that the operation will be atomic."
+        "#{@command.to_s.upcase} cannot be used in Tr8dis::Distributed because the keys involved need to be on the same server or because we cannot guarantee that the operation will be atomic."
       end
     end
 
@@ -18,7 +18,7 @@ class Redis
     def initialize(urls, options = {})
       @tag = options.delete(:tag) || /^\{(.+?)\}/
       @default_options = options
-      @ring = HashRing.new urls.map { |url| Redis.new(options.merge(:url => url)) }
+      @ring = HashRing.new urls.map { |url| Tr8dis.new(options.merge(:url => url)) }
       @subscribed_node = nil
     end
 
@@ -31,7 +31,7 @@ class Redis
     end
 
     def add_node(url)
-      @ring.add_node Redis.new(@default_options.merge(:url => url))
+      @ring.add_node Tr8dis.new(@default_options.merge(:url => url))
     end
 
     # Change the selected database for the current connection.
@@ -774,7 +774,7 @@ class Redis
     end
 
     def inspect
-      "#<Redis client v#{Redis::VERSION} for #{nodes.map(&:id).join(', ')}>"
+      "#<Tr8dis client v#{Tr8dis::VERSION} for #{nodes.map(&:id).join(', ')}>"
     end
 
   protected

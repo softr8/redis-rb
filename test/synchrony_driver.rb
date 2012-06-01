@@ -2,8 +2,8 @@
 
 require 'em-synchrony'
 
-require 'redis'
-require 'redis/connection/synchrony'
+require 'tr8dis'
+require 'tr8dis/connection/synchrony'
 
 require File.expand_path("./helper", File.dirname(__FILE__))
 
@@ -14,7 +14,7 @@ require File.expand_path("./helper", File.dirname(__FILE__))
 #
 
 EM.synchrony do
-  r = Redis.new
+  r = Tr8dis.new
   r.flushdb
 
   r.rpush "foo", "s1"

@@ -1,7 +1,7 @@
 require "monitor"
-require "redis/errors"
+require "tr8dis/errors"
 
-class Redis
+class Tr8dis
 
   def self.deprecate(message, trace = caller[0])
     $stderr.puts "\n#{message} (in #{trace})"
@@ -17,7 +17,7 @@ class Redis
   end
 
   def self.current
-    @current ||= Redis.new
+    @current ||= Tr8dis.new
   end
 
   def self.current=(redis)
@@ -2181,7 +2181,7 @@ class Redis
 
   def inspect
     synchronize do |client|
-      "#<Redis client v#{Redis::VERSION} for #{client.id}>"
+      "#<Redis client v#{Tr8dis::VERSION} for #{client.id}>"
     end
   end
 
@@ -2225,8 +2225,8 @@ private
 
 end
 
-require "redis/version"
-require "redis/connection"
-require "redis/client"
-require "redis/pipeline"
-require "redis/subscribe"
+require "tr8dis/version"
+require "tr8dis/connection"
+require "tr8dis/client"
+require "tr8dis/pipeline"
+require "tr8dis/subscribe"

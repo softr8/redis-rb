@@ -1,12 +1,12 @@
-require "redis/connection/command_helper"
-require "redis/connection/registry"
-require "redis/errors"
+require "tr8dis/connection/command_helper"
+require "tr8dis/connection/registry"
+require "tr8dis/errors"
 require "em-synchrony"
 require "hiredis/reader"
 
-class Redis
+class Tr8dis
   module Connection
-    class RedisClient < EventMachine::Connection
+    class Tr8disClient < EventMachine::Connection
       include EventMachine::Deferrable
 
       def post_init
@@ -58,13 +58,13 @@ class Redis
     end
 
     class Synchrony
-      include Redis::Connection::CommandHelper
+      include Tr8dis::Connection::CommandHelper
 
       def self.connect(config)
         if config[:scheme] == "unix"
-          conn = EventMachine.connect_unix_domain(config[:path], RedisClient)
+          conn = EventMachine.connect_unix_domain(config[:path], Tr8disClient)
         else
-          conn = EventMachine.connect(config[:host], config[:port], RedisClient) do |c|
+          conn = EventMachine.connect(config[:host], config[:port], Tr8disClient) do |c|
             c.pending_connect_timeout = [config[:timeout], 0.1].max
           end
         end
@@ -116,4 +116,4 @@ class Redis
   end
 end
 
-Redis::Connection.drivers << Redis::Connection::Synchrony
+Tr8dis::Connection.drivers << Tr8dis::Connection::Synchrony

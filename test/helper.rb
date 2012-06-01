@@ -13,9 +13,9 @@ $VERBOSE = true
 
 ENV["conn"] ||= "ruby"
 
-require "redis"
-require "redis/distributed"
-require "redis/connection/#{ENV["conn"]}"
+require "tr8dis"
+require "tr8dis/distributed"
+require "tr8dis/connection/#{ENV["conn"]}"
 
 require "support/redis_mock"
 require "support/connection/#{ENV["conn"]}"
@@ -31,12 +31,12 @@ def init(redis)
     redis.select 15
     redis.flushdb
     redis
-  rescue Redis::CannotConnectError
+  rescue Tr8dis::CannotConnectError
     puts <<-EOS
 
-      Cannot connect to Redis.
+      Cannot connect to Tr8dis.
 
-      Make sure Redis is running on localhost, port #{PORT}.
+      Make sure Tr8dis is running on localhost, port #{PORT}.
       This testing suite connects to the database 15.
 
       To install redis:
@@ -139,7 +139,7 @@ module Helper
     end
 
     def redis_mock(commands, options = {}, &blk)
-      RedisMock.start(commands) do |port|
+      Tr8disMock.start(commands) do |port|
         yield _new_client(options.merge(:port => port))
       end
     end
@@ -160,7 +160,7 @@ module Helper
     end
 
     def _new_client(options = {})
-      Redis.new(_format_options(options))
+      Tr8dis.new(_format_options(options))
     end
   end
 
@@ -182,7 +182,7 @@ module Helper
     end
 
     def _new_client(options = {})
-      Redis::Distributed.new(NODES, _format_options(options))
+      Tr8dis::Distributed.new(NODES, _format_options(options))
     end
   end
 end

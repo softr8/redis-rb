@@ -6,6 +6,11 @@
 
 A Ruby client library for [Redis][redis-home].
 
+
+THIS IS A CLONE OF THE ORIGINAL REDIS-RB GEM, I JUST RENAMED MAIN MODULE BECAUSE
+MY OWN NEEDS, ALL CREDIT IS ORIGINAL AUTHORS MENTIONED ABOVE
+
+
 [redis-home]: http://redis.io
 
 A Ruby client that tries to match Redis' API one-to-one, while still
@@ -28,7 +33,7 @@ with a Redis instance older than 2.0, but this is no longer supported.
 You can connect to Redis by instantiating the `Redis` class:
 
 ```ruby
-require "redis"
+require 'tr8dis"
 
 redis = Redis.new
 ```

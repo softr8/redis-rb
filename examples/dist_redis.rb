@@ -1,5 +1,5 @@
-require "redis"
-require "redis/distributed"
+require "tr8dis"
+require "tr8dis/distributed"
 
 r = Redis::Distributed.new %w[redis://localhost:6379 redis://localhost:6380 redis://localhost:6381 redis://localhost:6382]
 

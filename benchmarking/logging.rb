@@ -10,7 +10,7 @@ rescue LoadError
   exit 1
 end
 
-require "redis"
+require "tr8dis"
 require "logger"
 
 def log(level, namespace = nil)

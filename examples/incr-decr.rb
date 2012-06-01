@@ -1,4 +1,4 @@
-require 'redis'
+require 'tr8dis'
 
 r = Redis.new
 

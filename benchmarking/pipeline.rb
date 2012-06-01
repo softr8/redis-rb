@@ -2,7 +2,7 @@ require "benchmark"
 
 $:.push File.join(File.dirname(__FILE__), 'lib')
 
-require 'redis'
+require 'tr8dis'
 
 ITERATIONS = 10000
 

@@ -89,7 +89,7 @@ class TestPipeliningCommands < Test::Unit::TestCase
   # Although we could support accessing the values in these futures,
   # it doesn't make a lot of sense.
   def test_assignment_of_results_inside_the_block_with_errors
-    assert_raise(Redis::CommandError) do
+    assert_raise(Tr8dis::CommandError) do
       r.pipelined do
         r.doesnt_exist
         @first = r.sadd("foo", 1)
@@ -99,8 +99,8 @@ class TestPipeliningCommands < Test::Unit::TestCase
       end
     end
 
-    assert_raise(Redis::FutureNotReady) { @first.value }
-    assert_raise(Redis::FutureNotReady) { @second.value }
+    assert_raise(Tr8dis::FutureNotReady) { @first.value }
+    assert_raise(Tr8dis::FutureNotReady) { @second.value }
   end
 
   def test_assignment_of_results_inside_a_nested_block
@@ -126,7 +126,7 @@ class TestPipeliningCommands < Test::Unit::TestCase
 
   def test_futures_raise_when_trying_to_access_their_values_too_early
     r.pipelined do
-      assert_raise(Redis::FutureNotReady) do
+      assert_raise(Tr8dis::FutureNotReady) do
         r.sadd("foo", 1).value
       end
     end
